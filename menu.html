@@ -95,6 +95,19 @@ text-decoration: underline;
   margin-right: 50px;
   margin-left: 50px;
 }
+.btn-primary-s {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #E30B5C;
+  --bs-btn-border-color: #E30B5C;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #E30B5C;
+  --bs-btn-hover-border-color: #E30B5C;
+  --bs-btn-focus-shadow-rgb: 60, 198, 171;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #E0115F;
+  --bs-btn-active-border-color: #E0115F;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
     </style>
     <body id="page-top">
         <!-- Navigation-->
@@ -117,6 +130,14 @@ text-decoration: underline;
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
+          </div>
+          <div class="button-container" style="display: flex; justify-content: space-between; width: 100%; padding: 0 20px; box-sizing: border-box;">
+            <div class="button-wrapper left" style="margin-top: 5px; width: 48%; /* Adjust as needed */">
+              <button id="openAllBtn" class="btn btn-primary-s quicksand-bold" style="margin: 10px; --bs-btn-padding-y: 1rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 1.5rem; --bs-btn-border-radius: 100px;">Open All</button>
+            </div>
+            <div class="button-wrapper right" style="width: 48%; /* Adjust as needed */">
+              <button id="closeAllBtn" class="btn btn-primary-s quicksand-bold" style="margin: 10px; --bs-btn-padding-y: 1rem; --bs-btn-padding-x: 2rem; --bs-btn-font-size: 1.5rem; --bs-btn-border-radius: 100px;">Close All</button>
+            </div>
           </div>
           <div class="accordion margin quicksand-regular" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
@@ -240,7 +261,7 @@ text-decoration: underline;
               <div id="panelsStayOpen-collapseNine" class="accordion-collapse collapse">
                 <div class="accordion-body">
                   <div class="d-grid gap-2">
-                    <a class="btn btn-primary center1" href="allergies.html" role="button"><strong>Click This Link To Know About What Im Allergic To</strong></a>
+                    <a class="btn btn-primary center1" href="allergies.html" role="button"><strong>Click This Link To Know About What I'm Allergic To</strong></a>
                   </div>
                 </div>
               </div>
@@ -667,6 +688,44 @@ text-decoration: underline;
             </div>
           </div>
         </header>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const openAllBtn = document.getElementById('openAllBtn');
+  const closeAllBtn = document.getElementById('closeAllBtn');
+  const accordionItems = document.querySelectorAll('.accordion-collapse');
+  const accordionButtons = document.querySelectorAll('.accordion-button');
+
+  openAllBtn.addEventListener('click', function() {
+    accordionItems.forEach(item => {
+      if (!item.classList.contains('show')) {
+        // Use Bootstrap's Collapse object to show the accordion item
+        const collapse = new bootstrap.Collapse(item);
+        collapse.show();
+
+        // Update the button's aria-expanded attribute
+        const button = item.previousElementSibling.querySelector('.accordion-button');
+        button.setAttribute('aria-expanded', 'true');
+        button.classList.remove('collapsed');
+      }
+    });
+  });
+
+  closeAllBtn.addEventListener('click', function() {
+    accordionItems.forEach(item => {
+      if (item.classList.contains('show')) {
+        // Use Bootstrap's Collapse object to hide the accordion item
+        const collapse = new bootstrap.Collapse(item);
+        collapse.hide();
+
+        // Update the button's aria-expanded attribute
+        const button = item.previousElementSibling.querySelector('.accordion-button');
+        button.setAttribute('aria-expanded', 'false');
+        button.classList.add('collapsed');
+      }
+    });
+  });
+});
+</script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
